@@ -3,27 +3,43 @@ import React, { Component } from 'react';
 import '../components/styles.css';
 
 export class Footer extends Component {
-  AddTextBox = (e) => {
-    console.log(e);
-  };
   render() {
     return (
-      <div className="container footer">
+      <div className="container footer form-group column">
         <button
           type="button"
           className="btn btn-primary add"
-          onClick={(e) => this.AddTextBox(e)}
+          onClick={this.props.setTxtState}
+          disabled={this.props.btnDisable}
         >
           Add
         </button>
         <div className="btn-group">
-          <button type="button" className="btn border btn-secondary">
+          <button
+            type="button"
+            className="btn border btn-secondary"
+            onClick={() => {
+              this.props.onBtnClick(1);
+            }}
+          >
             All
           </button>
-          <button type="button" className="btn border btn-success">
+          <button
+            type="button"
+            className="btn border btn-success"
+            onClick={() => {
+              this.props.onBtnClick(2);
+            }}
+          >
             Active
           </button>
-          <button type="button" className="btn border btn-warning">
+          <button
+            type="button"
+            className="btn border btn-warning"
+            onClick={() => {
+              this.props.onBtnClick(3);
+            }}
+          >
             Completed
           </button>
         </div>

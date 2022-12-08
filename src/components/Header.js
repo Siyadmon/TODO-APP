@@ -3,21 +3,25 @@ import React, { Component } from 'react';
 import '../components/styles.css';
 
 export class Header extends Component {
+  state = {
+    txtValue: '',
+  };
+  onFormSubmit = (e) => {
+    e.preventDefault();
+    this.props.value(this.state.txtValue);
+  };
   render() {
     return (
-      <form>
-        <div className="container outer">
-          <div className="header border p-4 mt-5">
-            <h1 className="pb-4">THINGS TO DO</h1>
-
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Add New"
-              />
-            </div>
-          </div>
+      <form onSubmit={this.onFormSubmit}>
+        <div className="form-group container">
+          <input
+            type="text"
+            className="form-control txt"
+            placeholder="Type Here..."
+            onChange={(e) => {
+              this.setState({ txtValue: e.target.value });
+            }}
+          />
         </div>
       </form>
     );

@@ -26,5 +26,28 @@ body {
   margin-right: 50%;
 }
 .btn-group {
+  display: flex;
   align-items: right;
+}
+.CheckBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  width: 60.5%;
+  height: 5%;
+}
+@media only screen and (max-width: 926px) {
+  .footer {
+    flex-direction: column;
+  }
+  .add {
+    margin-right: 0;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+  }
 }
