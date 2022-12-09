@@ -25,10 +25,16 @@ export class App extends Component {
     });
   };
 
-  ClickedActiveBtn = (checked, val) => {
-    this.setState({
-      checked: [...this.state.checked, { checked: checked, val: val }],
-    });
+  targetAndVal = (checked, val) => {
+    this.state.checked.filter((todo) => todo.name === val).length > 0
+      ? this.setState({
+          ...this.state,
+          checked: this.state.checked.filter((todo) => todo.name !== val),
+        })
+      : this.setState({
+          ...this.state,
+          checked: [...this.state.checked, { name: val, selected: checked }],
+        });
   };
 
   onBtnClick = (btnVal) => {
@@ -53,7 +59,7 @@ export class App extends Component {
         <CheckBox
           value={this.state.value}
           checked={this.state.checked}
-          targetAndVal={this.ClickedActiveBtn}
+          targetAndVal={this.targetAndVal}
           onBtnClick={this.state.onBtnClick}
         />
 

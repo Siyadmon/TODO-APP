@@ -27,6 +27,7 @@ body {
 }
 .btn-group {
   display: flex;
+
   align-items: right;
 }
 .CheckBox {

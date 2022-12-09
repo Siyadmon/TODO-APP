@@ -6,7 +6,7 @@ export class CheckBox extends Component {
   };
   render() {
     let value = this.props.value;
-    let checked = this.props.checked.map((val) => val.val);
+    let checked = this.props.checked.map((val) => val.name);
 
     if (this.props.onBtnClick === 1) {
       value = this.props.value;
