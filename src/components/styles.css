@@ -35,8 +35,19 @@ body {
   flex-direction: row;
   justify-content: left;
   align-items: left;
-  width: 60.5%;
+  width: 63.5%;
   height: 5%;
+}
+
+.EditDeleteBtn {
+  margin-left: 43.6%;
+}
+
+.striked {
+  text-decoration-line: line-through;
+}
+.notStriked {
+  text-decoration-line: none;
 }
 @media only screen and (max-width: 926px) {
   .footer {

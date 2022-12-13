@@ -7,34 +7,42 @@ import CheckBox from './components/TodoListCheck';
 export class App extends Component {
   state = {
     txtBoxState: false,
-    value: [],
+    value: [], // array ,object inside array ,isSelected = checked/uncheck , isEditMode = true
     checked: [],
     onBtnClick: null,
+    isEditMode: false,
+    isAddMode: false,
   };
 
   setTxt = () => {
     this.setState({
       txtBoxState: true,
+      isAddMode: true,
     });
   };
 
   setValue = (txtValue) => {
     this.setState({
-      value: [...this.state.value, txtValue],
+      value: [
+        ...this.state.value,
+        {
+          name: txtValue,
+          isSelected: false,
+        },
+      ],
       txtBoxState: false,
     });
   };
 
-  targetAndVal = (checked, val) => {
-    this.state.checked.filter((todo) => todo.name === val).length > 0
-      ? this.setState({
-          ...this.state,
-          checked: this.state.checked.filter((todo) => todo.name !== val),
-        })
-      : this.setState({
-          ...this.state,
-          checked: [...this.state.checked, { name: val, selected: checked }],
-        });
+  targetAndVal = (val, index) => {
+    this.setState({
+      value: this.state.value.map((obj, indexPos) => {
+        return {
+          ...obj,
+          isSelected: indexPos === index ? val.target.checked : obj.isSelected,
+        };
+      }),
+    });
   };
 
   onBtnClick = (btnVal) => {
@@ -43,7 +51,30 @@ export class App extends Component {
     });
   };
 
+  Deletion = (index) => {
+    this.setState({
+      value: this.state.value.filter((ind, i) => i !== index), //index is always 2nd arguement
+    });
+  };
+
+  editElement = (editVal, index) => {
+    console.log(editVal, index);
+    // if (this.state.value.includes(editVal)) {
+    this.setState({
+      isEditMode: true,
+      editVal: editVal,
+    });
+    //   }
+  };
+
   render() {
+    console.log(this.state.isAddMode);
+    //console.log('value', this.state.value);
+    console.log(this.state.value);
+
+    // console.log('checked', this.state.checked);
+    // console.log(this.state.value.map((d) => d.name));
+
     return (
       <div>
         <div className="container outer">
@@ -51,8 +82,12 @@ export class App extends Component {
             <h1 className="pb-4">THINGS TO DO</h1>
 
             {this.state.txtBoxState === true ? (
-              <Header value={this.setValue} val={this.state.value} />
+              <Header value={this.setValue} />
             ) : null}
+
+            {/* {this.state.editValState === true ? (
+              <Header value={this.setEditValue} editVal={this.state.editVal} />
+            ) : null} */}
           </div>
         </div>
 
@@ -61,6 +96,9 @@ export class App extends Component {
           checked={this.state.checked}
           targetAndVal={this.targetAndVal}
           onBtnClick={this.state.onBtnClick}
+          forStrikeStyle={this.state.forStrikeStyle}
+          DeleteValue={this.Deletion}
+          editElement={this.editElement}
         />
 
         <Footer
